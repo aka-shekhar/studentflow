@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="main-content">
+        <section class="panel">
+            <h1>Edit Student Details</h1>
+
+            <form action="{{ url_for('update_student', roll_number=student.roll_number) }}"
+                  method="POST">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endwith %}
+                <label>Full Name</label>
+                <input type="text" name="name"
+                    value="{{ form_data.get('name', student.name) if form_data else student.name }}"
+                    required>
+
+                <label>Age</label>
+                <input type="number" name="age"
+                    value="{{ form_data.get('age', student.age) if form_data else student.age }}"
+                    min="1" required>
+
+                <label>Course</label>
+                <input type="text" name="course"
+                    value="{{ form_data.get('course', student.course) if form_data else student.course }}"
+                    required>
+
+                {% for mark in student.marks %}
+                    <label>Subject {{ loop.index }} Marks</label>
+                    <input type="number"
+                        name="mark{{ loop.index }}"
+                        value="{{ form_data.get('mark' ~ loop.index, mark) if form_data else mark }}"
+                        min="0" max="100" step="any" required>
+                {% endfor %}
+                <button type="submit">Save Changes</button>
+
+                <a href="{{ url_for('home') }}">Cancel</a>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

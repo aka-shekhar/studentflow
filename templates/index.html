@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <aside class="sidebar">
+    <h2>StudentFlow</h2>
+        <a href="{{ url_for('home') }}" class="active">Dashboard</a>
+        <a href="#students">Students</a>
+        <a href="#reports">Reports</a>
+        <a href="#rankings">Rankings</a>
+    </aside>
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <a href="{{ url_for('export_csv') }}" class="export-btn">
+                    ⬇ Export CSV
+                </a>
+                <p>Welcome to your Student Management System.</p>
+            </div>
+            <button onclick="showAddForm()">+ Add Student</button>
+            
+            <section class="panel" id="addStudentForm"
+         style="display: {{ 'block' if show_form else 'none' }};">
+                <h2>Add New Student</h2>
+
+                <form action="/add" method="POST">
+                    <label>Roll Number</label>
+                    <input type="number" name="roll_number" min="1"
+                        value="{{ form_data.get('roll_number', '') if form_data else '' }}"
+                        required>
+
+                    <label>Full Name</label>
+                    <input type="text" name="name"
+                        value="{{ form_data.get('name', '') if form_data else '' }}"
+                        required>
+
+                    <label>Age</label>
+                    <input type="number" name="age" min="1"
+                        value="{{ form_data.get('age', '') if form_data else '' }}"
+                        required>
+
+                    <label>Course</label>
+                    <input type="text" name="course"
+                        value="{{ form_data.get('course', '') if form_data else '' }}"
+                        required>
+
+                    <label>Subject 1 Marks</label>
+                    <input type="number" name="mark1" min="0" max="100" step="any"
+                        value="{{ form_data.get('mark1', '') if form_data else '' }}"
+                        required>
+
+                    <label>Subject 2 Marks</label>
+                    <input type="number" name="mark2" min="0" max="100" step="any"
+                        value="{{ form_data.get('mark2', '') if form_data else '' }}"
+                        required>
+
+                    <label>Subject 3 Marks</label>
+                    <input type="number" name="mark3" min="0" max="100" step="any"
+                        value="{{ form_data.get('mark3', '') if form_data else '' }}"
+                        required>
+
+                    <button type="submit">Save Student</button>
+                </form>
+            </section>
+
+        </header>
+
+        <section class="stats" id="reports">
+            <div class="stat-card">
+                <p>Total Students</p>
+                <h2>{{ total_students }}</h2> <!--Jinja templating syntax-->
+            </div>
+            <div class="stat-card">
+                <p>Average Marks</p>
+                <h2>{{ average_marks }}</h2>
+            </div>
+            <div class="stat-card">
+                <p>Top Performer</p>
+                <h2>{{ top_student.name if top_student else "N/A" }}</h2>
+            </div>
+            <div class="stat-card">
+                <p>Passed Students</p>
+                <h2>{{ passed_students }}</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Failed Students</p>
+                <h2>{{ failed_students }}</h2>
+            </div>
+        </section>
+
+        
+        <section class="panel" id="students">
+            <h2>Student Records</h2>
+
+            <input id="search" type="text"
+                placeholder="Search students...">
+
+            <select id="sortStudents">
+                <option value="">Sort Students</option>
+                <option value="name">Name (A-Z)</option>
+                <option value="roll">Roll Number</option>
+                <option value="marks">Marks (Highest First)</option>
+            </select>
+
+            <select id="gradeFilter">
+                <option value="">All Grades</option>
+                <option value="A+">A+</option>
+                <option value="A">A</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="B-">B-</option>
+                <option value="C">C</option>
+                <option value="F">F</option>
+            </select>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Course</th>
+                            <th>Marks</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentTable">
+                        {% for student in students %}
+                        <tr data-grade="{{ student.calculate_grade() }}">
+                            <td>{{ student.roll_number }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.age }}</td>
+                            <td>{{ student.course }}</td>
+                            <td data-marks="{{ student.calculate_avg() }}">
+                                {{ student.marks }}
+                            </td>
+                            <td>
+                            <form action="{{ url_for('delete_student', roll_number=student.roll_number) }}"
+                                method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this student?')">
+                                <a href="{{ url_for('edit_student', roll_number=student.roll_number) }}"
+                                     class="edit-btn">
+                                        Edit
+                                </a>
+                                <button type="submit" class="delete-btn">
+                                Delete
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="panel" id="rankings">
+            <h2>Student Rankings 🏆</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Roll No.</th>
+                            <th>Name</th>
+                            <th>Average</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for student in ranked_students %}
+                        <tr class="{% if loop.index == 1 %}rank-first{% elif loop.index == 2 %}rank-second{% elif loop.index == 3 %}rank-third{% endif %}">
+                            <td>
+                                {% if loop.index == 1 %}
+                                    🥇 1st
+                                {% elif loop.index == 2 %}
+                                    🥈 2nd
+                                {% elif loop.index == 3 %}
+                                    🥉 3rd
+                                {% else %}
+                                    {{ loop.index }}
+                                {% endif %}
+                            </td>
+                            <td>{{ student.roll_number }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ "%.2f"|format(student.calculate_avg()) }}</td>
+                            <td>{{ student.calculate_grade() }}</td>
+                           <td>
+                                {% if student.calculate_grade() == "F" %}
+                                    <span class="status-failed">Failed</span>
+                                {% else %}
+                                    <span class="status-passed">Passed</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

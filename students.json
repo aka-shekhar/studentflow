@@ -1,0 +1,233 @@
+[
+    {
+        "roll_number": 1,
+        "name": "Aarav Sharma",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            85.0,
+            78.0,
+            92.0
+        ]
+    },
+    {
+        "roll_number": 2,
+        "name": "Suman Thapa",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            76.0,
+            88.0,
+            81.0
+        ]
+    },
+    {
+        "roll_number": 3,
+        "name": "Nisha Karki",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            95.0,
+            91.0,
+            89.0
+        ]
+    },
+    {
+        "roll_number": 4,
+        "name": "Rohan Joshi",
+        "age": 20,
+        "course": "CT",
+        "marks": [
+            32.0,
+            75.0,
+            68.0
+        ]
+    },
+    {
+        "roll_number": 5,
+        "name": "Priya Bhandari",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            67.0,
+            72.0,
+            80.0
+        ]
+    },
+    {
+        "roll_number": 6,
+        "name": "Amit Rawal",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            45.0,
+            58.0,
+            62.0
+        ]
+    },
+    {
+        "roll_number": 7,
+        "name": "Sita Bohara",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            88.0,
+            93.0,
+            96.0
+        ]
+    },
+    {
+        "roll_number": 8,
+        "name": "Bibek Chand",
+        "age": 20,
+        "course": "CT",
+        "marks": [
+            55.0,
+            64.0,
+            70.0
+        ]
+    },
+    {
+        "roll_number": 9,
+        "name": "Anisha Poudel",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            91.0,
+            86.0,
+            94.0
+        ]
+    },
+    {
+        "roll_number": 10,
+        "name": "Kiran Bista",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            72.0,
+            69.0,
+            77.0
+        ]
+    },
+    {
+        "roll_number": 11,
+        "name": "Manish Adhikari",
+        "age": 20,
+        "course": "CT",
+        "marks": [
+            38.0,
+            42.0,
+            51.0
+        ]
+    },
+    {
+        "roll_number": 12,
+        "name": "Pooja Rana",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            84.0,
+            90.0,
+            87.0
+        ]
+    },
+    {
+        "roll_number": 13,
+        "name": "Dipesh Mahara",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            61.0,
+            73.0,
+            66.0
+        ]
+    },
+    {
+        "roll_number": 14,
+        "name": "Samiksha Joshi",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            97.0,
+            95.0,
+            93.0
+        ]
+    },
+    {
+        "roll_number": 15,
+        "name": "Prakash Khatri",
+        "age": 20,
+        "course": "CT",
+        "marks": [
+            28.0,
+            65.0,
+            72.0
+        ]
+    },
+    {
+        "roll_number": 16,
+        "name": "Ritika Shah",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            79.0,
+            82.0,
+            85.0
+        ]
+    },
+    {
+        "roll_number": 17,
+        "name": "Sagar Bohara",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            53.0,
+            57.0,
+            60.0
+        ]
+    },
+    {
+        "roll_number": 18,
+        "name": "Sneha Joshi",
+        "age": 20,
+        "course": "CT",
+        "marks": [
+            89.0,
+            92.0,
+            86.0
+        ]
+    },
+    {
+        "roll_number": 19,
+        "name": "Ritesh Thapa",
+        "age": 19,
+        "course": "CT",
+        "marks": [
+            35.0,
+            48.0,
+            55.0
+        ]
+    },
+    {
+        "roll_number": 20,
+        "name": "Alisha Rawat",
+        "age": 18,
+        "course": "CT",
+        "marks": [
+            74.0,
+            81.0,
+            78.0
+        ]
+    },
+    {
+        "roll_number": "21",
+        "name": "Kapil Saud",
+        "age": 20,
+        "course": "BBA",
+        "marks": [
+            54.0,
+            84.0,
+            75.0
+        ]
+    }
+]
